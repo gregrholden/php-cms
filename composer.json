@@ -1,0 +1,24 @@
+{
+  "name": "gregrholden/cosc630",
+  "require": {
+    "vlucas/phpdotenv": "^5.5",
+    "tinymce/tinymce": "^6.5"
+  },
+  "autoload": {
+    "classmap": [
+      "classes"
+    ]
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "rm -rf js/tinymce/",
+      "cp -R vendor/tinymce/tinymce/ js/"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Greg Holden",
+      "email": "gholden0@frostburg.edu"
+    }
+  ]
+}
