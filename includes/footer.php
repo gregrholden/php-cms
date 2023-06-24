@@ -2,7 +2,7 @@
     <footer class="container navbar fixed-bottom border-top">
       <div class="justify-content-start">
         <p>
-          <a class="text-dark" style="text-decoration:none;" href="/webProg1/COSC630/index.php">
+          <a class="text-dark" style="text-decoration:none;" href=<?php echo $BASE_URL . "index.php"; ?>>
             Holden
           </a>
         </p>
@@ -14,7 +14,7 @@
     </footer>
 
     <!-- Bootstrap theme JavaScript -->
-    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
     <!-- Close out page structure here -->
     </body>

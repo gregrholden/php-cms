@@ -3,6 +3,7 @@
 // Handle user registration.
 function register($username, $password, $fname, $lname, $email) {
   global $db;
+  global $BASE_URL;
   // Scrub User Input.
   $username = mysqli_real_escape_string($db, $username);
   $password = mysqli_real_escape_string($db, $password);
@@ -18,7 +19,7 @@ function register($username, $password, $fname, $lname, $email) {
   // Check if email already exists.
   elseif (user_field_exists('email', $email)) {
     $_SESSION['reg_status'] = 0;
-    $_SESSION['reg_msg'] = "This email address already has an account. Please <a class='text-light' href='/webProg1/COSC630/login.php'>login</a> or reset your password.";
+    $_SESSION['reg_msg'] = "This email address already has an account. Please <a class='text-light' href='". $BASE_URL . "login.php'>login</a> or reset your password.";
     return false;
   }
   // If neither exists and emails are properly structured, add user to database.
@@ -33,21 +34,23 @@ function register($username, $password, $fname, $lname, $email) {
     $stmt->close();
   }
   $_SESSION['reg_status'] = 1;
-  $_SESSION['reg_msg'] = "Account created. Please <a class='text-light' href='/webProg1/COSC630/login.php'>login</a>.";
+  $_SESSION['reg_msg'] = "Account created. Please <a class='text-light' href='" . $BASE_URL . "login.php'>login</a>.";
   return true;
 }
 
 // A replacement function to use if admin sets registration to "closed."
 function register_closed($username, $password, $fname, $lname, $email) {
+  global $BASE_URL;
   $_SESSION['reg_status'] = 0;
   $_SESSION['reg_msg'] = "Sorry. Registration of new users is currently closed.\n" .
-                         "Feel free to <a class='text-light' href='/webProg1/COSC630/index.php'>browse the site</a>.";
+                         "Feel free to <a class='text-light' href='" . $BASE_URL  ."index.php'>browse the site</a>.";
   return false;
 }
 
 // Handle user login.
 function login($username, $password) {
   global $db;
+  global $BASE_URL;
   $db_uid = null;
   $db_username = null;
   $db_password = null;
@@ -76,7 +79,7 @@ function login($username, $password) {
     $_SESSION['fname'] = $db_fname;
     $_SESSION['lname'] = $db_lname;
     $stmt->close();
-    redirect_to('/webProg1/COSC630/index.php');
+    redirect_to($BASE_URL . 'index.php');
   } else {
     $stmt->close();
     $_SESSION['login_err'] = "Incorrect username/password.\nPlease try again.";
@@ -131,11 +134,23 @@ function if_logged_in_then_redirect_to($redirectLocation = null) {
 
 function get_media_path_list() {
   $path = "../images";
-  $file_paths = array_diff(scandir($path), array('.', '..'));
+  // Use array_diff to strip out '.' and '..' from scandir results.
+  $file_paths = array_diff(scandir($path), array('.', '..', '.gitignore'));
   return $file_paths;
 }
 
 ////////////////////////
-// DATABASE FUNCTIONS //
+// DATABASE UTILITIES //
 ////////////////////////
-
+function insert_post($title, $body, $uid) {
+  global $db;
+  // Escape input.
+  $title = mysqli_real_escape_string($db, $title);
+  $body = mysqli_real_escape_string($db, $body);
+  // Prepared statement for insertion.
+  $stmt = $db->prepare("INSERT INTO content (title, body, uid, created, updated)
+      VALUES(?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
+  $stmt->bind_param('ssi', $title, $body, $uid);
+  $stmt->execute();
+  $stmt->close();
+}

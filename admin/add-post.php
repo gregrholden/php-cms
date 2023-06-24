@@ -13,12 +13,12 @@
 <section class="container col mt-2 ms-5">
   <div class="row mt-5">
     <h2>Add a New Post</h2>
+    <p><?php echo __DIR__; ?></p>
     <p>&nbsp;</p>
     <form action="../handlers/save-post.php" method="POST">
       <input class="form-control mb-2" type="text" placeholder="Enter a title" name="tinymce-title" required />
       <textarea id="tinymce" name="tinymce-content"></textarea>
       <input type="submit" class="btn btn-primary btn-lg mt-3" value="Publish" />
-      <input type="reset" class="btn btn-outline-danger btn-lg mt-3" value="Reset" />
     </form>
   </div>
 </section>

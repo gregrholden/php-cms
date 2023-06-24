@@ -4,6 +4,8 @@ session_start();
 
 session_destroy();
 
-header("Location: /webProg1/COSC630/");
+include '../config.php';
+
+header("Location: " . $BASE_URL);
 
 ?>

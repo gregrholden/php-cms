@@ -11,7 +11,7 @@
     if (!empty($file_paths)) {
       foreach ($file_paths as $index => $file_src) {
         echo '<div class="m-3" style="width: 200px; height: 200px; cursor: pointer; overflow: hidden;">
-                <img src="/webProg1/COSC630/images/' . $file_src . '"
+                <img src="images/' . $file_src . '"
                   class="img-fluid modal-img rounded" id="img_' . $index . '" loading="lazy"
                   data-bs-toggle="modal" data-bs-target="#image-modal"
                 />

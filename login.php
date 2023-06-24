@@ -3,19 +3,19 @@
 
 <?php
 
-if_logged_in_then_redirect_to('/webProg1/COSC630/index.php');
+if_logged_in_then_redirect_to($BASE_URL . 'index.php');
 
 if (is_method('post')) {
   if (isset($_POST['username']) && isset($_POST['password'])) {
     login($_POST['username'], $_POST['password']);
     // var_dump($stmt);
     if (isset($_SESSION['uid'])) {
-      redirect_to('/webProg1/COSC630/index.php');
+      redirect_to($BASE_URL . 'index.php');
     } else {
-      redirect_to('/webProg1/COSC630/login.php');
+      redirect_to($BASE_URL . 'login.php');
     }
   } else {
-    redirect_to('/webProg1/COSC630/login.php');
+    redirect_to($BASE_URL . 'login.php');
   }
 }
 
@@ -54,7 +54,7 @@ if (isset($_SESSION['login_err'])) {
       </form>
     </div>
   </div>
-  <p class='fs-6 fw-light text-center mt-5'>Need an account? <a href='/webProg1/COSC630/register.php'>Register here</a>.</p>
+  <p class='fs-6 fw-light text-center mt-5'>Need an account? <a href=<?php echo $BASE_URL . 'register.php'; ?>>Register here</a>.</p>
 </div>
 
 <?php

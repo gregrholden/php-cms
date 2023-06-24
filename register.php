@@ -3,7 +3,7 @@
 
 <?php
 
-if_logged_in_then_redirect_to('/webProg1/COSC630/index.php');
+if_logged_in_then_redirect_to($BASE_URL . 'index.php');
 
 if (is_method('post')) {
   if (
@@ -22,7 +22,7 @@ if (is_method('post')) {
       }
     }
   } else {
-    redirect_to('/webProg1/COSC630/register.php');
+    redirect_to($BASE_URL . 'register.php');
   }
 }
 
@@ -77,7 +77,7 @@ if (is_method('post')) {
       </form>
     </div>
   </div>
-  <p class='fs-6 fw-light text-center mt-5'>Already have an account? <a href='/webProg1/COSC630/login.php'>Login here</a>.</p>
+  <p class='fs-6 fw-light text-center mt-5'>Already have an account? <a href=<?php echo $BASE_URL . 'login.php'; ?>>Login here</a>.</p>
 </div>
 
 <script type="text/javascript">
