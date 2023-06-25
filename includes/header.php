@@ -3,8 +3,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ?>
 <?php session_start(['cookie_httponly' => true]); ?>
-<?php include 'config.php'; ?>
-<?php include 'includes/functions.php'; ?>
+<?php include __DIR__ . '/../config.php'; ?>
+<?php include __DIR__ . '/functions.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en-US">
@@ -26,4 +26,4 @@ ini_set('display_errors', 1);
 
 <body>
 
-  <?php include "includes/navbar.php" ?>
+  <?php include __DIR__ . "/navbar.php" ?>
