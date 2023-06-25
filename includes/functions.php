@@ -156,15 +156,43 @@ function insert_post($title, $body, $uid) {
   $stmt->close();
 }
 
-// Returns 'content' rows, with the body field truncated to 200 characters.
+// Returns 'content' rows, with the body field truncated to 300 characters.
 function get_content_trunc() {
   global $db;
   // Retrieve all content.
-  $query = "SELECT cid, title, LEFT(body, 200) AS abstract, uid, created, updated FROM content";
+  $query = "SELECT cid, title, LEFT(body, 300) AS abstract, uid, created, updated
+            FROM content
+            ORDER BY updated DESC";
   $stmt = $db->prepare($query);
   $stmt->execute();
   $result = $stmt->get_result();
   $rows = $result->fetch_all(MYSQLI_ASSOC);
   $stmt->close();
   return $rows;
+}
+
+// Return a full content node via its 'cid' value.
+function get_full_content_by_id($id) {
+  global $db;
+  $stmt = $db->prepare("SELECT cid, title, body, uid, created, updated
+                        FROM content
+                        WHERE cid = ?");
+  $stmt->bind_param('s', $id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $row = $result->fetch_assoc();
+  $stmt->close();
+  return $row;
+}
+
+// Use uid to retrieve user first and last name.
+function get_user_name($uid) {
+  global $db;
+  // Retrieve user's name by uid.
+  $query = "SELECT fname, lname
+            FROM users
+            WHERE uid = " . $uid;
+  $result = $db->query($query);
+  $row = $result->fetch_assoc();
+  return $row;
 }
