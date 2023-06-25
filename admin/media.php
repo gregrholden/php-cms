@@ -1,11 +1,11 @@
-<?php include "../../includes/db.php"; ?>
-<?php include 'includes/admin-header.php'; ?>
-<?php include 'includes/admin-navbar.php'; ?>
+<?php include __DIR__ . "/../includes/db.php"; ?>
+<?php include __DIR__ . "/includes/admin-header.php"; ?>
+<?php include __DIR__ . "/includes/admin-navbar.php"; ?>
 
 <?php $file_paths = get_media_path_list(); ?>
 
 <section class="container col mt-5 ms-5">
-  <a href="add-media.php" type="button" class="btn btn-primary">Upload Media</a>
+  <a href=<?php echo $BASE_URL . "admin/add-media.php"; ?> type="button" class="btn btn-primary">Upload Media</a>
   <div class="row mt-5">
     <?php
     if (!empty($file_paths)) {
@@ -55,4 +55,4 @@
   });
 </script>
 
-<?php include 'includes/admin-footer.php'; ?>
+<?php include __DIR__ . "/includes/admin-footer.php"; ?>

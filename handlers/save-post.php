@@ -1,12 +1,13 @@
 <?php session_start(); ?>
-<?php include '../../includes/db.php' ?>
-<?php include '../../includes/functions.php' ?>
+
+<?php include __DIR__ . '/../config.php'; ?>
+<?php include __DIR__ . '/../includes/db.php' ?>
+<?php include __DIR__ . '/../includes/functions.php' ?>
 
 <?php
 
-var_dump($_SESSION);
-var_dump($_REQUEST['tinymce-title']);
-var_dump($_REQUEST['tinymce-content']);
+insert_post($_REQUEST['tinymce-title'], $_REQUEST['tinymce-content'], $_SESSION['uid']);
 
+redirect_to($BASE_URL . "admin/posts.php");
 
 ?>

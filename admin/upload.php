@@ -1,14 +1,11 @@
-<?php include "../../includes/db.php"; ?>
-<?php include 'includes/admin-header.php'; ?>
-<?php include 'includes/admin-navbar.php'; ?>
+<?php include __DIR__ . "/../includes/db.php"; ?>
+<?php include __DIR__ . "/includes/admin-header.php"; ?>
+<?php include __DIR__ . "/includes/admin-navbar.php"; ?>
 <?php
 $target_dir = "../images/";
 $target_file = $target_dir . basename($_FILES["media"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-echo exec('whoami');
-var_dump($_FILES);
 
 // Check if image file is a actual image or fake image.
 if (isset($_POST["submit"])) {
@@ -55,4 +52,4 @@ if ($uploadOk == 0) {
   }
 }
 ?>
-<?php include 'includes/admin-footer.php'; ?>
+<?php include __DIR__ . "/includes/admin-footer.php"; ?>

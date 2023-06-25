@@ -1,5 +1,5 @@
-<?php include "includes/db.php"; ?>
-<?php include "includes/header.php"; ?>
+<?php include __DIR__ . "/includes/db.php"; ?>
+<?php include __DIR__ . "/includes/header.php"; ?>
 
 <?php
 
@@ -63,4 +63,4 @@ unset($_SESSION['login_err']);
 ?>
 
 <!-- End of Document: Footer -->
-<?php include "includes/footer.php"; ?>
+<?php include __DIR__ . "/includes/footer.php"; ?>

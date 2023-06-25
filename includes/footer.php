@@ -1,5 +1,5 @@
     <!-- Use 'navbar' class to fix footer to bottom of page. -->
-    <footer class="container navbar fixed-bottom border-top">
+    <footer class="container navbar border-top mt-5">
       <div class="justify-content-start">
         <p>
           <a class="text-dark" style="text-decoration:none;" href=<?php echo $BASE_URL . "index.php"; ?>>

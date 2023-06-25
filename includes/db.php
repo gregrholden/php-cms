@@ -1,2 +1,2 @@
-<?php require 'vendor/autoload.php'; ?>
+<?php require __DIR__ . '/../vendor/autoload.php'; ?>
 <?php $db = Database::getInstance(); ?>

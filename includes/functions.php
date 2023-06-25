@@ -133,7 +133,7 @@ function if_logged_in_then_redirect_to($redirectLocation = null) {
 }
 
 function get_media_path_list() {
-  $path = "../images";
+  $path = __DIR__ . "/../images";
   // Use array_diff to strip out '.' and '..' from scandir results.
   $file_paths = array_diff(scandir($path), array('.', '..', '.gitignore'));
   return $file_paths;
@@ -147,10 +147,24 @@ function insert_post($title, $body, $uid) {
   // Escape input.
   $title = mysqli_real_escape_string($db, $title);
   $body = mysqli_real_escape_string($db, $body);
+  var_dump($body);
   // Prepared statement for insertion.
   $stmt = $db->prepare("INSERT INTO content (title, body, uid, created, updated)
       VALUES(?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
   $stmt->bind_param('ssi', $title, $body, $uid);
   $stmt->execute();
   $stmt->close();
+}
+
+// Returns 'content' rows, with the body field truncated to 200 characters.
+function get_content_trunc() {
+  global $db;
+  // Retrieve all content.
+  $query = "SELECT cid, title, LEFT(body, 200) AS abstract, uid, created, updated FROM content";
+  $stmt = $db->prepare($query);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $rows = $result->fetch_all(MYSQLI_ASSOC);
+  $stmt->close();
+  return $rows;
 }
